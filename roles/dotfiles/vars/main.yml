@@ -11,3 +11,11 @@ repos:
   - dir: '~/.tmux/plugins'
     repo: 'https://github.com/tmux-plugins/tpm'
     dest: '~/.tmux/plugins/tpm'
+
+packages:
+  - fzf
+  - git
+  - powerline
+  - tmux
+  - zoxide
+  - zsh

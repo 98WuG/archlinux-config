@@ -1,5 +1,11 @@
 # vim: ts=2 sw=2 smartindent
 
+- name: Install necessary packages
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: latest
+  become: yes
+
 - name: Create dot folders for git repos
   ansible.builtin.file:
     path: "{{ item.dir }}"
@@ -15,15 +21,6 @@
   register: git_result
   changed_when: "git_result.after|default('after') != git_result.before|default('before')"
   loop: "{{ repos }}"
-
-- name: Install necessary packages
-  ansible.builtin.package:
-    name:
-      - fzf
-      - powerline
-      - zoxide
-    state: latest
-  become: yes
 
 - name: Copy dotfiles
   ansible.posix.synchronize:

@@ -4,5 +4,8 @@
   include: pacman.yml
   become: yes
 
+- name: Configure services
+  include: podman.yml
+
 - name: Install scripts
   include: scripts.yml

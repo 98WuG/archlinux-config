@@ -23,6 +23,11 @@
     update_cache: yes
     upgrade: yes
 
+- name: Remove potentially conflicting packages
+  community.general.pacman:
+    name: "{{ conflicting_packages }}"
+    state: absent
+
 - name: Install packages
   community.general.pacman:
     name: "{{ packages }}"
@@ -34,15 +39,12 @@
     dest: "/usr/lib/systemd/system/"
   with_fileglob:
     - "systemd/*"
-  register: pacman_download
 
 - name: Enable the timer files
   ansible.builtin.systemd:
     name: "{{ item | basename }}"
-    state: restarted
+    state: started
     enabled: yes
-    daemon_reload: yes
   with_fileglob:
     - "systemd/*.timer"
-  when: pacman_download.changed
 

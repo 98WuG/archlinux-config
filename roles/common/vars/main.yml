@@ -1,4 +1,9 @@
 ---
+conflicting_packages:
+  - htop
+  - mlocate
+  - docker
+
 packages:
   - bat
   - docker-compose
@@ -7,6 +12,8 @@ packages:
   - htim
   - podman
   - podman-docker
+  - plocate
   - tmux
   - zsh
+
 home: "{{ lookup('env', 'HOME') }}"
