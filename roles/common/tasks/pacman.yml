@@ -48,17 +48,17 @@
 
 - name: Make scripts directory
   ansible.builtin.file:
-    path: "~/Scripts"
+    path: "{{ home }}/Scripts"
     state: directory
-  with_fileglob:
-    - "scripts/*"
   tags:
     - scripts
 
 - name: Copy scripts
   ansible.builtin.copy:
-    src: "scripts/"
-    dest: "~/Scripts/"
+    src: "{{ item }}"
+    dest: "{{ home }}/Scripts/"
+  with_fileglob:
+    - "scripts/*"
   tags:
     - scripts
 

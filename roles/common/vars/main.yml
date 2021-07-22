@@ -4,8 +4,9 @@ packages:
   - docker-compose
   - fzf
   - gvim
-  - htop
+  - htim
   - podman
   - podman-docker
   - tmux
   - zsh
+home: "{{ lookup('env', 'HOME') }}"
