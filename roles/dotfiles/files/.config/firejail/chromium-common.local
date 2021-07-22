@@ -1,0 +1,1 @@
+whitelist /tmp/xauth-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-_[[:xdigit:]]

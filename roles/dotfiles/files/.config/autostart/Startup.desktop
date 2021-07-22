@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=Startup Script
+Encoding=UTF-8
+Exec=/home/jerry/.config/autostart/startup.sh
+Name=Startup
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Type=Application
+Version=0.9.4

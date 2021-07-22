@@ -1,0 +1,5 @@
+[Unit]
+Description=Run syncoid
+
+[Service]
+ExecStart=/usr/bin/syncoid --recursive --skip-parent --no-sync-snap {{ item.src }} {{ item.dest }}

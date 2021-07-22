@@ -1,0 +1,5 @@
+noblacklist ${HOME}/.Genymobile
+noblacklist ${HOME}/temp/whonix
+
+whitelist ${HOME}/.Genymobile
+whitelist ${HOME}/temp/whonix

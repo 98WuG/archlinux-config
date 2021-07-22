@@ -1,0 +1,13 @@
+---
+repos:
+  - dir: '~/.zinit'
+    repo: 'https://github.com/zdharma/zinit.git'
+    dest: '~/.zinit/bin'
+
+  - dir: '~/.vim/bundle'
+    repo: 'https://github.com/VundleVim/Vundle.vim'
+    dest: '~/.vim/bundle/Vundle.vim'
+
+  - dir: '~/.tmux/plugins'
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: '~/.tmux/plugins/tpm'

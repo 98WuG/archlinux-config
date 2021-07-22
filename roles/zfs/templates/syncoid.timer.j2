@@ -1,0 +1,8 @@
+[Unit]
+Description=Run syncoid {{ item.frequency }}
+
+[Timer]
+{{ item.timer }}
+
+[Install]
+WantedBy=timers.target

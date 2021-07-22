@@ -1,0 +1,19 @@
+*.log
+*.swp
+*.pid
+/config/chromium
+/config/firefox
+/config/sublime-text-3/Cache
+/config/libreoffice
+/config/ranger/history
+/config/pulse
+/config/sublime-text-3/Local
+/config/sublime-text-3/Cache
+/vimperator/info/default/history*
+/config/Mist
+/config/Sia-UI
+/config/Jaxx
+/config/Nano\ Desktop
+/config/VirtualBox
+/config/Neon
+/config/spotify

@@ -1,0 +1,2 @@
+noblacklist ${HOME}/.gnupg
+whitelist ${HOME}/.gnupg

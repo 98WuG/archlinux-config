@@ -1,0 +1,4 @@
+noblacklist /tmp/tmp
+whitelist /tmp/tmp
+blacklist /net
+whitelist /tmp/xauth-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-_[[:xdigit:]]

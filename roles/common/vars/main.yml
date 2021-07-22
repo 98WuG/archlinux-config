@@ -1,0 +1,10 @@
+---
+packages:
+  - docker-compose
+  - fzf
+  - gvim
+  - htop
+  - podman
+  - podman-docker
+  - tmux
+  - zsh

@@ -1,0 +1,47 @@
+# vim: ts=2 sw=2 smartindent
+
+- name: Add pacman repos
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/pacman.d/"
+  with_fileglob:
+    - "pacman.d/*"
+
+- name: Copy pacman conf
+  ansible.builtin.copy:
+    src: pacman.conf
+    dest: /etc/pacman.conf
+
+- name: Import archzfs key
+  community.general.pacman_key:
+    id: DDF7DB817396A49B2A2723F7403BD972F75D9D76
+    url: https://archzfs.com/archzfs.gpg
+    state: present
+
+- name: Run pacman -Syu
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install packages
+  community.general.pacman:
+    name: "{{ packages }}"
+    state: present
+
+- name: Install pacman autodownload systemd service
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/usr/lib/systemd/system/"
+  with_fileglob:
+    - "systemd/*"
+  register: pacman_download
+
+- name: Enable the timer files
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  with_fileglob:
+    - "systemd/*.timer"
+  when: pacman_download.changed

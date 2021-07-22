@@ -1,0 +1,214 @@
+# interpreter for shell commands
+set shell sh
+
+# set '-eu' options for shell commands
+# These options are used to have safer shell commands. Option '-e' is used to
+# exit on error and option '-u' is used to give error for unset variables.
+# Option '-f' disables pathname expansion which can be useful when $f, $fs, and
+# $fx variables contain names with '*' or '?' characters. However, this option
+# is used selectively within individual commands as it can be limiting at
+# times.
+set shellopts '-eu'
+
+# set internal field separator (IFS) to "\n" for shell commands
+# This is useful to automatically split file names in $fs and $fx properly
+# since default file separator used in these variables (i.e. 'filesep' option)
+# is newline. You need to consider the values of these options and create your
+# commands accordingly.
+set ifs "\n"
+
+# leave some space at the top and the bottom of the screen
+set scrolloff 10
+
+set icons
+set info size
+
+# use enter for shell commands
+map <enter> shell
+
+# execute current file (must be executable)
+map x $$f
+map X !$f
+
+# dedicated keys for file opener actions
+map o &mimeopen $fx
+map O $mimeopen --ask-default $fx
+
+# define a custom 'open' command
+# This command is called when current file is not a directory. You may want to
+# use either file extensions and/or mime types here. Below uses an editor for
+# text files and a file opener for the rest.
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        text/*) $EDITOR $fx;;
+        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+# define a custom 'rename' command without prompt for overwrite
+# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# map r push :rename<space>
+
+# make sure trash folder exists
+# %mkdir -p ~/.trash
+
+# move current file or selected files to trash folder
+# (also see 'man mv' for backup/overwrite options)
+cmd trash %set -f; mv $fx ~/.trash
+
+# define a custom 'delete' command
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ $ans = "y" ] && rm -rf $fx
+}}
+
+# use '<delete>' key for either 'trash' or 'delete' command
+# map <delete> trash
+# map <delete> delete
+map D delete
+map <f-5> reload
+
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.tar.zst|*.tzst) tar -I zstd -xvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+# compress current file or selected files with tar and gunzip
+cmd tarz ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czvf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with tar and bzip2
+cmd tarb ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar cjvf $1.tar.bz2 $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with tar and xz
+cmd tarxz ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar cJvf $1.tar.xz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with tar and zstd
+cmd tarzst ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar -I zstd -cvf $1.tar.zst $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# Losslessly optimize selected images
+cmd opti ${{
+    set -f
+    echo "$fx" | grep -i -e "\\.jpe\?g" | xargs -I{} jpegoptim --strip-all '{}'
+    echo "$fx" | grep -i -e "\\.png" | xargs -I{} optipng -strip all '{}'
+}}
+
+# Lossy compress selected images
+cmd opti2 ${{
+    set -f
+    echo "$fx" | grep -i -e "\\.jpe\?g" | xargs -I{} sh -c 'jpegoptim --strip-all "{}"; convert "{}" -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB "{}"'
+    echo "$fx" | grep -i -e "\\.png" | xargs -I{} pngquant --quality 40-80 '{}'
+}}
+
+# Convert selected images to jpg
+cmd tojpg ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; convert "$f" "${f%.*}.jpg"'
+}}
+
+# Resize selected images (percentage)
+cmd resize ${{
+    set -f
+    echo "$fx" | xargs -I{} convert '{}' -resize ${1}% '{}'
+}}
+
+# Touch file
+cmd touch ${{
+    set -f
+    touch $1
+}}
+
+# Run waifu2x on selected images
+cmd waifu ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; waifu2x-ncnn-vulkan -i "$f" -o "${f%.*}_2x.${f##*.}"'
+}}
+
+# Rename images to their md5 checksums
+cmd md5 ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; mv "$f" $(md5sum "$f" | cut -d" " -f1).${f##*.}'
+}}
+
+# Rename images to their sha256 checksums
+cmd sha256 ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; mv "$f" $(sha256sum "$f" | cut -d" " -f1).${f##*.}'
+}}
+
+# Rename images to their sha3-512 checksums
+cmd sha3 ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; mv "$f" $(rhash --sha3-512 "$f" | cut -d" " -f1).${f##*.}'
+}}
+
+# Remove all EXIF data from images
+cmd exif ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; exiftool -all= "$f" && rm -f "${f}_original"'
+}}
+
+# Re-encode video with two-pass VP9
+# First arg: CRF
+# Second arg: New filename
+cmd vp9 ${{
+    set -f
+    ffmpeg -i "$f" -c:v libvpx-vp9 -row-mt 1 -b:v 0 -crf "${1}" -pass 1 -an -f null /dev/null && ffmpeg -i "$f" -c:v libvpx-vp9 -row-mt 1 -b:v 0 -crf "${1}" -pass 2 -c:a libopus "${2}"
+}}
+
+# Re-encode video with h264
+# First arg: CRF
+# Second arg: New filename
+cmd h264 ${{
+    set -f
+    ffmpeg -i "$f" -c:v h264 -c:a aac -crf "${1}" -preset slower "${2}"
+}}
+
+# Fast aliases for common locations
+cmd cawp    cd ~/Anime/Wallpaper
+cmd ct      cd /tmp/tmp

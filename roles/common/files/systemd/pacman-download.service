@@ -1,0 +1,5 @@
+[Unit]
+Description=Download Pacman packages
+
+[Service]
+ExecStart=/usr/bin/pacman -Syuw --noconfirm

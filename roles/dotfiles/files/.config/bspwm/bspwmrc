@@ -1,0 +1,116 @@
+#! /bin/sh
+
+bspc config border_width        0
+bspc config window_gap		10
+
+bspc config right_padding	10
+bspc config bottom_padding	10
+bspc config left_padding	10
+bspc config top_padding 	10
+
+bspc config split_ratio         0.5
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+#bspc config paddingless_monocle true
+bspc config focus_follows_pointer false
+bspc config focused_border_color \#20b2aa
+#bspc config active_border_color \#006250
+bspc config active_border_color \#999999
+bspc config normal_border_color \#004230
+bspc config click_to_focus	any
+
+#if [ $(bspc query -M | wc -l) -gt 1 ];
+#then
+#	bspc monitor HDMI1 -n 1 -d {$(echo -e "\uf120"),$(echo -e "\uf269"),$(echo -e "\uf121"),$(echo -e "\uf15c")}
+#	bspc monitor eDP1 -n 2 -d {$(echo -e "\uf025"),$(echo -e "\uf120"),$(echo -e "\uf03e"),$(echo -e "\uf07b")}
+#else
+#	bspc monitor eDP1 -n 1 -d {$(echo -e "\uf120"),$(echo -e "\uf269"),$(echo -e "\uf121"),$(echo -e "\uf15c"),$(echo -e "\uf025")}
+#fi
+#bspc monitor -d {$(echo -e "\uf120"),$(echo -e "\uf269"),$(echo -e "\uf121"),$(echo -e "\uf15c"),$(echo -e "\uf025"),$(echo -e "\uf144"),$(echo -e "\uf023")}
+#bspc monitor HDMI-0 -n 2 -d {$(echo -e "\uf025"),$(echo -e "\uf120"),$(echo -e "\uf03e"),$(echo -e "\uf07b")}
+#bspc monitor -d o o o o o o
+#NMON=$i
+#unset i
+#bspc monitor -d I II III IV V VI VII VIII IX X
+
+#Configure desktop padding for casual terminal usage aka #aesthetic over functionality
+bspc config -d ^1 top_padding 15
+bspc config -d ^1 right_padding 15
+bspc config -d ^1 left_padding 15
+bspc config -d ^1 bottom_padding 15
+
+bspc config -d ^5 top_padding 15
+bspc config -d ^5 right_padding 15
+bspc config -d ^5 left_padding 15
+bspc config -d ^5 bottom_padding 15
+
+#Configure desktop padding for fullscreen browsing
+#bspc desktop ^2 -l monocle
+bspc config -d ^2 top_padding -10
+bspc config -d ^2 right_padding -10
+bspc config -d ^2 left_padding -10
+bspc config -d ^2 bottom_padding -10
+bspc config -d ^2 single_monocle true
+bspc config -d ^6 top_padding -10
+bspc config -d ^6 right_padding -10
+bspc config -d ^6 left_padding -10
+bspc config -d ^6 bottom_padding -10
+bspc config -d ^6 single_monocle true
+bspc config -d ^7 top_padding -10
+bspc config -d ^7 right_padding -10
+bspc config -d ^7 left_padding -10
+bspc config -d ^7 bottom_padding -10
+bspc config -d ^7 single_monocle true
+
+
+bspc rule -a Gimp:gimp desktop=^4
+bspc rule -a Firefox desktop=^2
+bspc rule -a Chromium desktop=^2
+bspc rule -a qutebrowser desktop=^2
+bspc rule -a Chromium-browser-chromium desktop=^2
+bspc rule -a "LibreOffice 5.2" desktop=^4 state=tiled
+bspc rule -a "LibreOffice 5.3" desktop=^4 state=tiled
+bspc rule -a "libreoffice-startcenter":"libreoffice" desktop=^4 state=tiled
+bspc rule -a subl3 desktop=^3 follow=on
+bspc rule -a Screenkey manage=off
+bspc rule -a URxvt:floating state=floating
+bspc rule -a URxvt:pseudo state=pseudo_tiled
+bspc rule -a URxvt:heythatprettygood desktop=^1 state=tiled
+#bspc rule -a feh:feh state=fullscreen
+#bspc rule -a mpv:gl state=fullscreen
+bspc rule -a "LibreOffice 5.2":libreoffice desktop=^4 state=tiled
+bspc rule -a "LibreOffice 5.3":libreoffice desktop=^4 state=tiled
+bspc rule -a "Chromium":"crx_gaedmjdfmmahhbjefcbgaolhhanlaolb" state=floating #Authy
+bspc rule -a "Chromium":"crx_beimhnaefocolcplfimocfiaiefpkgbf" state=floating #Ledger Manager
+bspc rule -a "Chromium":"crx_hmlhkialjkaldndjnlcdfdphcgeadkkm" state=floating #Ledger ETH Wallet
+bspc rule -a "Chromium":"crx_kkdpmhnladdopljabkgpacgpliggeeaf" state=floating #Ledger BTC Wallet
+bspc rule -a "Chromium-browser-chromium":"crx_gaedmjdfmmahhbjefcbgaolhhanlaolb" state=pseudo_tiled #Authy
+bspc rule -a "Yubico Authenticator":"yubioath-desktop" state=floating
+bspc rule -a URxvt:music desktop=^5 split_ratio=0.65 split_dir=east
+bspc rule -a URxvt:visualizer desktop=^5 split_ratio=0.65
+bspc rule -a Zathura state=tiled
+
+# Load playlist if none loaded
+#function terms {
+#	urxvtc -name heythatprettygood &
+#	if [[ -z $(mpc playlist) ]];
+#	then
+#		urxvtc -name music -e sh -c "ncmpcpp; zsh" &
+#	else
+#		urxvtc -name music -e sh -c "ncmpcpp; zsh" &
+#	fi
+#	sleep 0.1
+#	urxvtc -name visualizer -e sh -c "cava; zsh" &
+#}
+
+alacritty &
+
+terms
+
+bspc desktop -f ^1
+
+flashfocus -t 500 &
+
+#x11vnc -wait 50 -noxdamage -passwd 998467mnq78a97 -display :0 -forever -o /var/log/x11vnc.log -bg
+
+#panel &

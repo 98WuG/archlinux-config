@@ -1,0 +1,33 @@
+# vim: ts=2 sw=2 smartindent
+
+- name: Create dot folders for git repos
+  ansible.builtin.file:
+    path: "{{ item.dir }}"
+    state: directory
+    recurse: yes
+  loop: "{{ repos }}"
+
+- name: Install git repos
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    update: yes
+  register: git_result
+  changed_when: "git_result.after|default('after') != git_result.before|default('before')"
+  loop: "{{ repos }}"
+
+- name: Install necessary packages
+  ansible.builtin.package:
+    name:
+      - fzf
+      - powerline
+      - zoxide
+    state: latest
+  become: yes
+
+- name: Copy dotfiles
+  ansible.posix.synchronize:
+    src: .
+    dest: ~/
+  tags:
+    - files

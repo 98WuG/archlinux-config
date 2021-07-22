@@ -1,0 +1,5 @@
+whitelist /tmp/xauth-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-_[[:xdigit:]]
+whitelist ${HOME}/Anime/Wallpaper
+
+noblacklist ${HOME}/.gnupg
+whitelist ${HOME}/.gnupg

@@ -1,0 +1,62 @@
+Xft.dpi: 96
+Xft.lcdfiler: lcddefault
+Xft*antialias: true
+URxvt*depth: 32
+URxvt*cursorBlink: 1
+URxvt*cursorUnderline: 0
+
+! Remove scrollbar
+URxvt*scrollBar:     false
+
+! Inconsolata font
+URxvt*font:	xft:DejaVu Sans Mono for Powerline:size=9,
+		xft:unifont:style=Medium:antialias=false
+
+! Internal border
+URxvt*.internalBorder:	0
+
+! special
+URxvt*.foreground:   #c0c5ce
+URxvt*.background:   [90]#1b2b34
+URxvt*.cursorColor:  #c0c5ce
+rofi.fg: #c0c5ce
+rofi.bg: [95]#1b2b34
+
+
+! black
+URxvt*.color0:       #1b2b34
+URxvt*.color8:       #65737e
+
+! red
+URxvt*.color1:       #ec5f67
+URxvt*.color9:       #ec5f67
+
+! green
+URxvt*.color2:       #99c794
+URxvt*.color10:      #99c794
+
+! yellow
+URxvt*.color3:       #fac863
+URxvt*.color11:      #fac863
+
+! blue
+URxvt*.color4:       #6699cc
+URxvt*.color12:      #6699cc
+
+! magenta
+URxvt*.color5:       #c594c5
+URxvt*.color13:      #c594c5
+
+! cyan
+URxvt*.color6:       #5fb3b3
+URxvt*.color14:      #5fb3b3
+
+! white
+URxvt*.color7:       #c0c5ce
+URxvt*.color15:      #d8dee9
+
+! ROFI color theme
+rofi.font:		DejaVu Sans Mono for Powerline 10
+rofi.color-enabled:	true
+rofi.color-window:	#1b2b34, #1b2b34
+rofi.color-normal:	#1b2b34, #c0c5ce, #1b2b34, #586e75, #c0c5ce

@@ -1,0 +1,17 @@
+---
+syncoid:
+  - name: 'local'
+    src: 'zroot'
+    dest: 'zbackup/zroot'
+    frequency: 'every hour'
+    timer: |
+      OnBootSec=5min
+      OnUnitActiveSec=1h
+
+  - name: 'remote'
+    src: 'zbackup/zroot'
+    dest: 'root@pandora:storage/ds2/backups/zroot'
+    frequency: 'every 8 hours'
+    timer: |
+      OnBootSec=10min
+      OnUnitActiveSec=8h

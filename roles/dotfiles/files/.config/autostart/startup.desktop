@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Startup
+Comment=Startup script
+Type=Application
+Exec=~/.config/autostart/startup.sh
+Icon=
+Terminal=false
+StartupNotify=false
+Hidden=false
+GenericName=

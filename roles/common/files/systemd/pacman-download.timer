@@ -1,0 +1,9 @@
+[Unit]
+Description=Download Pacman every 2 hours
+
+[Timer]
+OnBootSec=30min
+OnUnitActiveSec=2h
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,8 @@
+noblacklist /net
+noblacklist /tmp
+whitelist /tmp/mpvsocket
+whitelist /tmp/file[[:alnum:]][[:alnum:]][[:alnum:]][[:alnum:]][[:alnum:]][[:alnum:]]
+whitelist /tmp/xauth-[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]-_[[:xdigit:]]
+noblacklist ${HOME}/temp
+whitelist ${HOME}/temp
+ignore nogroups
