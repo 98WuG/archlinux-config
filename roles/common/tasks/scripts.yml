@@ -1,0 +1,14 @@
+# vim: ts=2 sw=2 smartindent
+
+- name: Make scripts directory
+  ansible.builtin.file:
+    path: "{{ home }}/Scripts"
+    state: directory
+
+- name: Copy scripts
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ home }}/Scripts/"
+    mode: '0755'
+  with_fileglob:
+    - "scripts/*"

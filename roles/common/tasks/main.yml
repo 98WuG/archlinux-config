@@ -3,3 +3,6 @@
 - name: Configure pacman
   include: pacman.yml
   become: yes
+
+- name: Install scripts
+  include: scripts.yml

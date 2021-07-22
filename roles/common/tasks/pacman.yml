@@ -46,19 +46,3 @@
     - "systemd/*.timer"
   when: pacman_download.changed
 
-- name: Make scripts directory
-  ansible.builtin.file:
-    path: "{{ home }}/Scripts"
-    state: directory
-  tags:
-    - scripts
-
-- name: Copy scripts
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "{{ home }}/Scripts/"
-  with_fileglob:
-    - "scripts/*"
-  tags:
-    - scripts
-
