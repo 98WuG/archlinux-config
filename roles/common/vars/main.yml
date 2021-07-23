@@ -3,6 +3,7 @@ conflicting_packages:
   - htop
   - mlocate
   - docker
+  - vim
 
 packages:
   - bat

@@ -5,7 +5,7 @@
   become: yes
 
 - name: Configure services
-  include: podman.yml
+  include: services.yml
 
 - name: Install scripts
   include: scripts.yml

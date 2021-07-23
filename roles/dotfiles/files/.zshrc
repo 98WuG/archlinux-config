@@ -66,7 +66,7 @@ source ~/.zinit/bin/zinit.zsh
 zinit ice wait lucid
 zinit light popstas/zsh-command-time
 ZSH_COMMAND_TIME_MIN_SECONDS=10
-ZSH_COMMAND_TIME_EXCLUDE=(vi vim ex ed tmux z zi top htop btm)
+ZSH_COMMAND_TIME_EXCLUDE=(ssh xxh vi vim ex ed tmux z zi top htop btm)
 
 # history-substring-search
 zinit ice wait"0a" lucid
