@@ -61,7 +61,7 @@ abbrevs+=(
 
 # aur
 abbrevs+=(
-  "ac"	"aur sync --pacman-conf /etc/pacman.conf --makepkg-conf /etc/makepkg_chroot.conf -c"
+  "ac"	"aur sync --pacman-conf /etc/pacman_chroot.conf --makepkg-conf /etc/makepkg_chroot.conf -c"
   "avd"	"aur vercmp-devel"
 )
 
