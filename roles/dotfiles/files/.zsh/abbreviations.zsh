@@ -20,7 +20,9 @@ abbrevs=(
   "pchrome"     "firejail --private chromium"
   "locate"      "plocate"
   "fzfbat"      "fzf --preview 'bat --style=numbers --color=always --line-range=:500 {}'"
-  "xc"          "| xclip -sel clip"
+  "|xc"         "| xclip -sel clip"
+  "|g"          "| grep"
+  "pwc"         "pwgen --symbols __CURSOR__ --num-passwords 1 | tr -d '\n' | xclip -sel clip"
   "ydl"         "youtube-dl"
 )
 
