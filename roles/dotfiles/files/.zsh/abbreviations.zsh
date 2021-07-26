@@ -22,7 +22,8 @@ abbrevs=(
   "fzfbat"      "fzf --preview 'bat --style=numbers --color=always --line-range=:500 {}'"
   "|xc"         "| xclip -sel clip"
   "|g"          "| grep"
-  "pwc"         "pwgen --symbols __CURSOR__ --num-passwords 1 | tr -d '\n' | xclip -sel clip"
+  "pwc"         "pwgen --secure --num-passwords 1 __CURSOR__ | tr -d '\n' | xclip -sel clip"
+  "pws"         "pwgen --secure --symbols --num-passwords 1 __CURSOR__ | tr -d '\n' | xclip -sel clip"
   "ydl"         "youtube-dl"
 )
 
