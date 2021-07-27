@@ -20,3 +20,10 @@
     state: started
     enabled: yes
   become: yes
+
+- name: Enable and start pkgfile update timer
+  ansible.builtin.systemd:
+    name: pkgfile-update.timer
+    state: started
+    enabled: yes
+  become: yes

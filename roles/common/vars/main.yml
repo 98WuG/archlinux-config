@@ -11,9 +11,10 @@ packages:
   - fzf
   - gvim
   - htim
+  - pkgfile
+  - plocate
   - podman
   - podman-docker
-  - plocate
   - tmux
   - zsh
 
