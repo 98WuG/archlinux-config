@@ -5,7 +5,6 @@
     name: podman.socket
     state: started
     enabled: yes
-  become: yes
 
 - name: Enable and start podman user socket
   ansible.builtin.systemd:
@@ -13,17 +12,16 @@
     state: started
     enabled: yes
     scope: user
+  become: no
 
 - name: Enable and start plocate timer
   ansible.builtin.systemd:
     name: plocate-updatedb.timer
     state: started
     enabled: yes
-  become: yes
 
 - name: Enable and start pkgfile update timer
   ansible.builtin.systemd:
     name: pkgfile-update.timer
     state: started
     enabled: yes
-  become: yes

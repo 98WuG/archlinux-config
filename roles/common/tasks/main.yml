@@ -6,6 +6,7 @@
 
 - name: Configure services
   include: services.yml
+  become: yes
 
 - name: Install scripts
   include: scripts.yml
