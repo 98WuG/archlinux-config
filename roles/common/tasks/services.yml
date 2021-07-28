@@ -14,6 +14,28 @@
     scope: user
   become: no
 
+- name: See if apparmor exists
+  ansible.builtin.stat:
+    path: /usr/bin/aa-status
+  register: aa
+
+- name: Install apparmor profiles
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/apparmor.d/local/"
+    mode: '0644'
+  with_fileglob:
+    - "apparmor.d/*"
+  when: aa.stat.exists
+  register: aa_profiles
+
+- name: Reload apparmor profiles
+  ansible.builtin.shell:
+    cmd: "apparmor -r /etc/apparmor.d/{{ item | basename }}"
+  with_fileglob:
+    - "apparmor.d/*"
+  when: aa_profiles.changed
+
 - name: Enable and start plocate timer
   ansible.builtin.systemd:
     name: plocate-updatedb.timer
