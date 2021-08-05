@@ -1,4 +1,4 @@
-alias ls="exa --color=auto --group-directories-first"
+alias ls="exa --color=auto --group-directories-first --icons"
 #alias acg="aur sync -M /etc/makepkg_chroot.conf -c --no-view --no-ver-shallow --no-confirm $(pacman -Sl custom | awk  '{print $2}' | grep '\-git$' | sed ':a;N;$!ba;s/\n/ /g')"
 #alias paco="sudo pacman -Rcns $(pacman -Qtdq)"
 alias vz="glava --desktop -m radial &; glava --desktop &"

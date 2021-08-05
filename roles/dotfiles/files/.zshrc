@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE="$HOME/.zsh_history"
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
