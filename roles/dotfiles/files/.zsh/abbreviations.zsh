@@ -150,7 +150,7 @@ abbrevs+=(
   "drid"  "docker rmi -f \$(docker images -q -f \"dangling=true\")"
   "dcu"   "docker-compose up"
   "dcd"   "docker-compose down"
-  "dcb"   "docker-compose build"
+  "dcbd"  "docker-compose build"
 )
 
 # Podman
