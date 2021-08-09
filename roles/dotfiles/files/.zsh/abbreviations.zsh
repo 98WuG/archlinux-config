@@ -4,33 +4,26 @@ typeset -A abbrevs
 
 # General aliases
 abbrevs=(
-  "ll"          "ls -al"
-  "l1"          "ls -1A"
+  "ll"          "ls -lah"
   ":q"          "exit"
   "sz"          "source ~/.zshrc"
-  "spoweroff"   "sudo systemctl stop zfs-syncoid-remote && sudo systemctl stop zfs-syncoid-local && sudo systemctl stop NetworkManager && poweroff"
-  "sreboot"     "sudo systemctl stop zfs-syncoid-remote && sudo systemctl stop zfs-syncoid-local && sudo systemctl stop autofs && sudo systemctl stop NetworkManager && reboot"
-  "wreboot"     "sudo efibootmgr --bootnext DC5B && sreboot"
+  "wreboot"     "sudo efibootmgr --bootnext DC5B"
   "mpv"         "devour mpv"
   "pifs"        "πfs"
   "zback1"      "sudo zpool import -f -d /dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RANX0J441149V-part1 zbackup && sudo zfs load-key zbackup && sudo zpool set cachefile=none zbackup"
   "rp"          "kquitapp5 plasmashell && kstart5 plasmashell"
-  "lf"          "lf-ueberzug"
   "ethmine"     "tmuxinator start mine"
-  "pchrome"     "firejail --private chromium"
-  "locate"      "plocate"
-  "fzfbat"      "fzf --preview 'bat --style=numbers --color=always --line-range=:500 {}'"
-  "|xc"         "| xclip -sel clip"
-  "|g"          "| grep"
+  "fzfb"        "fzf --preview 'bat --style=numbers --color=always --line-range=:500 {}'"
   "pwc"         "pwgen --secure --num-passwords 1 __CURSOR__ | tr -d '\n' | xclip -sel clip"
   "pws"         "pwgen --secure --symbols --num-passwords 1 __CURSOR__ | tr -d '\n' | xclip -sel clip"
   "ydl"         "youtube-dl"
+  "tma"         "tmux a"
 )
 
 # Paths
 abbrevs+=(
-  "awp"   "~/Anime/Wallpaper/"
-  "tt"    "/tmp/tmp/"
+  "awp"   "~/Anime/Wallpaper/__CURSOR__"
+  "tt"    "/tmp/tmp/__CURSOR__"
 )
 
 # topgrade
@@ -112,18 +105,14 @@ abbrevs+=(
 # firewalld
 abbrevs+=(
   "fdl"  "sudo firewall-cmd --list-all"
-  "fds"  "sudo firewall-cmd --permanent --add-service="
-  "fdp"  "sudo firewall-cmd --permanent --add-port="
+  "fds"  "sudo firewall-cmd --permanent --add-service=__CURSOR__"
+  "fdp"  "sudo firewall-cmd --permanent --add-port=__CURSOR__"
   "fdr"  "sudo firewall-cmd --reload"
 )
 
 # Ansible
 abbrevs+=(
   "ap"    "ansible-playbook"
-  "aall"  "ansible all -m"
-  "aa"    "ansible actuv -m"
-  "aps"   "ansible-playbook setup.yml"
-  "apv"   "ansible-playbook vm_setup.yml"
   "ar"    "rm *.retry"
 )
 
@@ -140,7 +129,7 @@ abbrevs+=(
   "tnws"  "tmux new-window -n server bin/webpack-dev-server \; split-window -v rails s"
   "tnwb"  "tmux new-window -n boards vim -p board-now.md board-later.md board-scratch-pad.md"
   "tnwl"  "tmux new-window -n logs \"while ((1)) { heroku logs -t -r production }\""
-  "tnwp"  "tmux new-window -n ping ping 8.8.8.8"
+  "tnwp"  "tmux new-window -n ping ping 1.1.1.1"
 
   "tks"   "tmux kill-session"
 
@@ -159,6 +148,9 @@ abbrevs+=(
   "dkbd"  "docker build ."
   "dkbt"  "docker build -t __CURSOR__ ."
   "drid"  "docker rmi -f \$(docker images -q -f \"dangling=true\")"
+  "dcu"   "docker-compose up"
+  "dcd"   "docker-compose down"
+  "dcb"   "docker-compose build"
 )
 
 # Podman
@@ -214,7 +206,7 @@ done
 
 magic-enter () {
   # If commands are not already set, use the defaults
-  [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status -u ."
+  [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status -u . && ls -lh"
   [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
   if [[ -z $BUFFER ]]; then

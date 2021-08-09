@@ -1,7 +1,6 @@
 alias ls="exa --color=auto --group-directories-first --icons"
-#alias acg="aur sync -M /etc/makepkg_chroot.conf -c --no-view --no-ver-shallow --no-confirm $(pacman -Sl custom | awk  '{print $2}' | grep '\-git$' | sed ':a;N;$!ba;s/\n/ /g')"
-#alias paco="sudo pacman -Rcns $(pacman -Qtdq)"
 alias vz="glava --desktop -m radial &; glava --desktop &"
+alias lf="lf-ueberzug"
 flashortho() {
 	echo -e "\nPUT KEYBOARD INTO BOOTLOADER MODE NOW!\n"
 	if [ -z $1 ];
@@ -41,49 +40,6 @@ settrackball() {
 	xinput --set-prop "Primax Kensington Eagle Trackball" "Coordinate Transformation Matrix" $speed, 0.000000, 0.000000, 0.000000, $speed, 0.000000, 0.000000, 0.000000, $speed
 	xinput --set-prop "Primax Kensington Eagle Trackball" "libinput Accel Speed" -0.75
 }
-docker-recreate() {
-	for folder in ~/docker/*
-	do
-		pushd $folder > /dev/null
-		echo "Recreating $(basename $folder)..."
-		docker-compose down
-		docker-compose up -d
-		popd > /dev/null
-	done
-}
-docker-update() {
-	docker images |grep -v REPOSITORY|awk '{print $1}'|xargs -L1 docker pull
-
-	read -r "?Recreate all images? [y/N] " response
-	case "$response" in
-		[yY][eE][sS]|[yY])
-			docker-recreate
-			;;
-		*)
-			echo "Run \`docker-recreate\` when ready"
-			;;
-	esac
-
-	read -r "?Prune all old images? [y/N] " response
-	case "$response" in
-		[yY][eE][sS]|[yY])
-			docker system prune -a
-			;;
-		*)
-			echo "Run \`docker system prune -a\` when ready"
-			;;
-	esac
-}
-docker-backup() {
-	cd ~
-	export DATE="$(date +"%Y-%m-%d-%H-%M")"
-	export FILENAME="$DATE.tar.bz2"
-	export DIR="/home/jerry/docker"
-sudo -E sh <<\EOF
-tar cf - $DIR -P | pv -s $(du -sb $DIR | awk '{print $1}') | bzip2 -c > "$FILENAME"
-EOF
-	mv "$FILENAME" ~/Documents/Backups/docker/
-}
 rename-show() {
 	SHOWNAME=$1
 	SEASON=$2
@@ -95,25 +51,8 @@ rename-show() {
 		COUNTER=$((COUNTER+1))
 	done
 }
-alias mine='~/Scripts/mine'
 power() {
 	sudo nvidia-smi -pl $1
-}
-alias next='feh --randomize --bg-fill ~/Pictures/Wallpaper/'
-alias alpha='tungsten'
-alias mutt='cd ~/Documents/mutt && mutt; cd ~'
-alias tma='tmux attach'
-
-music() {
-	if [[ -z $(mpc playlist) ]];
-	then
-		urxvtc -name music -e sh -c "ncmpcpp -s browser; zsh"
-		#urxvtc -name music -e sh -c "ncmpcpp; zsh"
-	else
-		urxvtc -name music -e sh -c "ncmpcpp; zsh"
-	fi
-	sleep 0.1
-	urxvtc -name visualizer -e sh -c "cava; zsh"
 }
 flac2mp3() {
 	if [[ ! -z "$@" ]];
@@ -131,7 +70,6 @@ flac2mp3() {
 	fi
 }
 alias weather='curl wttr.in/McLean'
-alias aesthetic='bspc node -t pseudo_tiled && neofetch'
 #
 # Useless aliases below this point
 
