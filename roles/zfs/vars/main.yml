@@ -3,10 +3,10 @@ syncoid:
   - name: 'local'
     src: 'zroot'
     dest: 'zbackup/zroot'
-    frequency: 'every hour'
+    frequency: 'every 3 hours'
     timer: |
       OnBootSec=5min
-      OnUnitActiveSec=1h
+      OnUnitActiveSec=3h
 
   - name: 'remote'
     src: 'zbackup/zroot'
