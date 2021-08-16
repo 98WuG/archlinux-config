@@ -7,15 +7,24 @@ conflicting_packages:
 
 packages:
   - bat
+  - broot
+  - curlie
   - docker-compose
+  - dog
+  - exa
+  - fd
   - fzf
   - gvim
   - htim
+  - hyperfine
+  - jq
+  - ncdu
   - pkgfile
   - plocate
   - podman
   - podman-docker
   - tmux
+  - zoxide
   - zsh
 
 home: "{{ lookup('env', 'HOME') }}"
