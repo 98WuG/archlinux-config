@@ -36,7 +36,7 @@
 - name: Install pacman autodownload systemd service
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "/usr/lib/systemd/system/"
+    dest: "/etc/systemd/system/"
   with_fileglob:
     - "systemd/*"
 
