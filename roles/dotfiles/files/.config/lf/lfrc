@@ -136,6 +136,7 @@ cmd opti ${{
     set -f
     echo "$fx" | grep -i -e "\\.jpe\?g" | xargs -I{} jpegoptim --strip-all '{}'
     echo "$fx" | grep -i -e "\\.png" | xargs -I{} optipng -strip all '{}'
+    echo "$fx" | grep -i -e "\\.webp" | xargs -I{} cwebp '{}' -lossless -z 9 -mt -o '{}'
 }}
 
 # Lossy compress selected images
@@ -143,12 +144,25 @@ cmd opti2 ${{
     set -f
     echo "$fx" | grep -i -e "\\.jpe\?g" | xargs -I{} sh -c 'jpegoptim --strip-all "{}"; convert "{}" -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB "{}"'
     echo "$fx" | grep -i -e "\\.png" | xargs -I{} pngquant --quality 40-80 '{}'
+    echo "$fx" | grep -i -e "\\.webp" | xargs -I{} cwebp '{}' -q 75 -alpha_q 80 -m 6 -mt -o '{}'
 }}
 
 # Convert selected images to jpg
 cmd tojpg ${{
     set -f
     echo "$fx" | xargs -I{} sh -c 'f="{}"; convert "$f" "${f%.*}.jpg"'
+}}
+
+# Convert selected images to webp losslessly
+cmd towebp ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; cwebp "$f" -lossless -z 9 -mt -o "${f%.*}.webp"'
+}}
+
+# Convert selected images to webp lossy
+cmd towebp2 ${{
+    set -f
+    echo "$fx" | xargs -I{} sh -c 'f="{}"; cwebp "$f" -q 75 -alpha_q 80 -m 6 -mt -o "${f%.*}.webp"'
 }}
 
 # Resize selected images (percentage)
