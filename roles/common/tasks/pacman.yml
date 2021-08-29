@@ -32,20 +32,3 @@
   community.general.pacman:
     name: "{{ packages }}"
     state: present
-
-- name: Install pacman autodownload systemd service
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/etc/systemd/system/"
-  with_fileglob:
-    - "systemd/*"
-
-- name: Enable the timer files
-  ansible.builtin.systemd:
-    name: "{{ item | basename }}"
-    state: started
-    enabled: yes
-    daemon_reload: yes
-  with_fileglob:
-    - "systemd/*.timer"
-

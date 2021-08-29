@@ -47,3 +47,20 @@
     name: pkgfile-update.timer
     state: started
     enabled: yes
+
+- name: Install custom systemd services
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/"
+  with_fileglob:
+    - "systemd/*"
+
+- name: Enable timer files
+  ansible.builtin.systemd:
+    name: "{{ item | basename }}"
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  with_fileglob:
+    - "systemd/*.timer"
+
