@@ -3,14 +3,14 @@
 - name: Install syncoid service files
   ansible.builtin.template:
     src: syncoid.service.j2
-    dest: "/usr/lib/systemd/system/zfs-syncoid-{{ item.name }}.service"
+    dest: "/etc/systemd/system/zfs-syncoid-{{ item.name }}.service"
   loop: "{{ syncoid }}"
   register: service
 
 - name: Install syncoid timer files
   ansible.builtin.template:
     src: syncoid.timer.j2
-    dest: "/usr/lib/systemd/system/zfs-syncoid-{{ item.name }}.timer"
+    dest: "/etc/systemd/system/zfs-syncoid-{{ item.name }}.timer"
   loop: "{{ syncoid }}"
   register: timer
 
