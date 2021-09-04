@@ -10,7 +10,6 @@ abbrevs=(
   "wreboot"     "sudo efibootmgr --bootnext DC5B"
   "mpv"         "devour mpv"
   "pifs"        "πfs"
-  "zback1"      "sudo zpool import -f -d /dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RANX0J441149V-part1 zbackup && sudo zfs load-key zbackup && sudo zpool set cachefile=none zbackup"
   "rp"          "kquitapp5 plasmashell && kstart5 plasmashell"
   "ethmine"     "tmuxinator start mine"
   "fzfb"        "fzf --preview 'bat --style=numbers --color=always --line-range=:500 {}'"
@@ -18,6 +17,13 @@ abbrevs=(
   "pws"         "pwgen --secure --symbols --num-passwords 1 __CURSOR__ | tr -d '\n' | xclip -sel clip"
   "ydl"         "youtube-dl"
   "tma"         "tmux a"
+)
+
+# zfs stuff
+abbrevs+=(
+  "hymnt"   "sudo zfs load-key zroot/data/hydrus && sudo zfs mount zroot/data/hydrus"
+  "hyumnt"  "sudo zfs umount zroot/data/hydrus && sudo zfs unload-key zroot/data/hydrus"
+  "zback1"  "sudo zpool import -f -d /dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RANX0J441149V-part1 zbackup && sudo zfs load-key zbackup && sudo zpool set cachefile=none zbackup"
 )
 
 # Paths

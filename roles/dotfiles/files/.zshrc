@@ -42,6 +42,9 @@ setopt NO_CHECK_JOBS
 # ctrl+w stops at certain delimeters
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+# ffsend config
+export FFSEND_HOST="https://send.geraldwu.com"
+
 # Automatically escape special chars in URL
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
