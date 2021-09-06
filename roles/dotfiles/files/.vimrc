@@ -10,6 +10,9 @@ syntax enable
 " Enable relative line numbers
 set relativenumber
 
+" Set encoding to UTF-8 for YCM
+set encoding=utf-8
+
 " Remap split navigation shortcut keys
 nnoremap <C-j> <C-W><C-J>
 nnoremap <C-k> <C-W><C-K>
