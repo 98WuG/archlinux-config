@@ -10,7 +10,7 @@ syncoid:
 
   - name: 'remote'
     src: 'zbackup/zroot'
-    dest: 'root@pandora:storage/ds2/backups/zroot'
+    dest: 'root@pandora.geraldwu.com:storage/ds2/backups/zroot'
     frequency: 'every 8 hours'
     timer: |
       OnBootSec=10min
