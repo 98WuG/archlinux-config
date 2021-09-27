@@ -200,7 +200,7 @@ abbrevs+=(
   "kdf"   "kubectl delete -f"
   "kdk"   "kubectl delete -k ."
   "kdp"   "kubectl delete pods"
-  "kdd"   "kubectl get deployments"
+  "kdd"   "kubectl delete deployments"
   "kds"   "kubectl delete services"
   "kdi"   "kubectl delete ingress"
   "kdv"   "kubectl delete pv"
