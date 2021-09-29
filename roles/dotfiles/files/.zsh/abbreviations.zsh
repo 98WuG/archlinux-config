@@ -195,18 +195,18 @@ abbrevs+=(
   "kgca"  "kubectl get pvc --all-namespaces"
   "ka"    "kubectl apply"
   "kaf"   "kubectl apply -f"
-  "kak"   "kubectl apply -k ."
+  "kak"   "kubectl apply -k"
   "kd"    "kubectl delete"
   "kdf"   "kubectl delete -f"
-  "kdk"   "kubectl delete -k ."
+  "kdk"   "kubectl delete -k"
   "kdp"   "kubectl delete pods"
   "kdd"   "kubectl delete deployments"
   "kds"   "kubectl delete services"
   "kdi"   "kubectl delete ingress"
   "kdv"   "kubectl delete pv"
   "kdc"   "kubectl delete pvc"
-  "kb"    "kustomize build ."
-  "kbka"  "kustomize build . | kubectl apply -f -"
+  "kb"    "kustomize build"
+  "kbka"  "kustomize build __CURSOR__ | kubectl apply -f -"
 )
 
 # dav
