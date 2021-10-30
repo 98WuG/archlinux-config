@@ -207,6 +207,14 @@ cmd exif ${{
     echo "$fx" | xargs -I{} sh -c 'f="{}"; exiftool -all= "$f" && rm -f "${f}_original"'
 }}
 
+# Re-encode video with two-pass AV1
+# First arg: QP
+# Second arg: New filename
+cmd av1 ${{
+    set -f
+    ffmpeg -i "$f" -c:v libsvtav1 -preset 7 -qp "${1}" -b:v 0 -pass 1 -an -f null /dev/null && ffmpeg -i "$f" -c:a libopus -c:v libsvtav1 -preset 7 -q "${1}" -b:v 0 -pass 2 "${2}"
+}}
+
 # Re-encode video with two-pass VP9
 # First arg: CRF
 # Second arg: New filename
