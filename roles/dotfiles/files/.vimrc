@@ -43,6 +43,10 @@ nmap <C-n> :set invnumber<CR>:set relativenumber!<CR>
 " Map <Leader>S to save as sudo
 noremap <Leader>S :w !sudo tee % > /dev/null <CR>
 
+" Base64 inline replace
+vnoremap <Leader>atob c<C-r>=system('base64', @")<CR><ESC>
+vnoremap <Leader>btoa c<C-r>=system('base64 --decode', @")<CR><ESC>
+
 " Reload .vimrc
 noremap <Leader><Leader>r :so ~/.vimrc <CR>
 
