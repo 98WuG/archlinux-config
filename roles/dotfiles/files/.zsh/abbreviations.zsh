@@ -206,6 +206,7 @@ abbrevs+=(
   "kdv"   "kubectl delete pv"
   "kdc"   "kubectl delete pvc"
   "kpv"   "kubectl get pv | awk '/Released/ {print \$1;}' | xargs -I{} kubectl delete pv {}"
+  "kcdbg" "kubectl run --stdin --tty --rm debug --image=alpine --restart=Never -- sh"
   "kb"    "kustomize build"
   "kbka"  "kustomize build __CURSOR__ | kubectl apply -f -"
 )
