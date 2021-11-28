@@ -62,6 +62,9 @@ test -r "$HOME/.dir_colors" && eval $(dircolors -b "$HOME/.dir_colors")
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
+# Source all k8s configs
+export KUBECONFIG="$(\ls ~/.kube | awk -v d="$HOME/.kube/" '/conf/ { printf "%s%s:", d,$0}')"
+
 # zinit
 source ~/.zinit/bin/zinit.zsh
 
