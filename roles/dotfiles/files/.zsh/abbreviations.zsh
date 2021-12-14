@@ -16,6 +16,8 @@ abbrevs=(
   "pwc"         "pwgen --secure --num-passwords 1 __CURSOR__ | tr -d '\n' | xclip -sel clip"
   "pws"         "pwgen --secure --symbols --num-passwords 1 __CURSOR__ | tr -d '\n' | xclip -sel clip"
   "ydl"         "youtube-dl"
+  "ytdl"        "yt-dlp"
+  "gdl"         "gallery-dl"
   "tma"         "tmux a"
 )
 
@@ -119,7 +121,6 @@ abbrevs+=(
 # Ansible
 abbrevs+=(
   "ap"    "ansible-playbook"
-  "ar"    "rm *.retry"
 )
 
 # Tmux
