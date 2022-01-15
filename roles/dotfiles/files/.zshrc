@@ -117,6 +117,11 @@ zinit wait lucid atload"zicompinit; zicdreplay" blockf for \
 zinit light subnixr/minimal
 MNML_OK_COLOR=6
 
+# kube-ps1
+zinit light jonmosco/kube-ps1
+PROMPT='$(kube_ps1)'"$PROMPT"
+kubeoff -g
+
 # Source everything from ~/.zsh/*.zsh
 for f ("$HOME"/.zsh/*.zsh) . $f
 

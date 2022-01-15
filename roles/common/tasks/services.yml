@@ -31,7 +31,7 @@
 
 - name: Reload apparmor profiles
   ansible.builtin.shell:
-    cmd: "apparmor -r /etc/apparmor.d/{{ item | basename }}"
+    cmd: "apparmor_parser -r /etc/apparmor.d/{{ item | basename }}"
   with_fileglob:
     - "apparmor.d/*"
   when: aa_profiles.changed
